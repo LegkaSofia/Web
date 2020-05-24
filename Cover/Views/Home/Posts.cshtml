@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Post>
+
+@foreach (var post in Model)
+{
+    <div class="card border-primary mb-1">
+        <div class="card-title text-center font-weight-bold">
+            <a class="card-link" asp-action="Details" asp-controller="Post" asp-route-postId="@post.Id">
+                @post.CreateBy
+            </a>
+        </div>
+        <div class="card-body bg-dark text-white">
+            @post.Body
+        </div>
+
+        <div class="card-footer row p-0 m-0 d-flex">
+            @if (post.Likes == null || post.Likes.Count == 0)
+            {
+                <button class="btn btn-outline-danger like-btn" onclick="addLike('@post.Id')">
+                    &hearts; <span class="like-count">0</span>
+                </button>
+            }
+            else
+            {
+                if (post.Likes.Where(l => l.UserLogin == User.Identity.Name).Count() == 0)
+                {
+                    <button class="btn  btn-outline-danger like-btn" onclick="addLike('@post.Id')">
+                        &hearts; <span class="like-count">@post.Likes.Count</span>
+                    </button>
+                }
+                else
+                {
+                    <button class="btn  btn-danger like-btn" onclick="addLike('@post.Id')">
+                        &hearts; <span class="like-count">@post.Likes.Count</span>
+                    </button>
+                }
+
+            }
+
+
+
+            <button class="btn btn-outline-dark">
+                &lArr;@if (post.Comments == null)
+                {
+                    <span>0</span>
+                }
+                else
+                {
+                    <span>
+                        @post.Comments.Count
+                    </span>
+                }
+
+            </button>
+            <div class="ml-auto align-baseline mr-0 text-sm-right text-dark font-weight-bold">
+                @post.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+            </div>
+        </div>
+
+    </div>
+}

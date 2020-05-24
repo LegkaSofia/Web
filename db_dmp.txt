@@ -1,0 +1,13 @@
+Create (u:User {login: "olena",fullName: "Olena Flower"});
+Create (u:User {login: "sofa",fullName: "Sofia Legka"});
+Create (u:User {login: "stepan",fullName: "Stepan Step"});
+Create (u:User {login: "admin",fullName: "Taras Sharko"});
+Create (u:User {login: "pie",fullName: "Pie Tree"});
+Create (u:User {login: "ysharko",fullName: "Yulia Sharko"});
+Match (u:User {login: "sofa"}), (f:User {login: "admin"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "admin"}), (f:User {login: "sofa"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "pie"}), (f:User {login: "sofa"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "admin"}), (f:User {login: "pie"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "pie"}), (f:User {login: "ysharko"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "ysharko"}), (f:User {login: "olena"}) Create (u)-[r:Friended_With]->(f);
+Match (u:User {login: "olena"}), (f:User {login: "ysharko"}) Create (u)-[r:Friended_With]->(f);

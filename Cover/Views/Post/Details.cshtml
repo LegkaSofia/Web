@@ -1,0 +1,51 @@
+﻿@model PostViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+    <div class="d-flex bg-light">
+        <div class="card" style="width:100%">
+            <h5 class="card-header text-center">
+                @Model.Post.CreateBy
+            </h5>
+            <div class="card-body">
+                <p class="card-text">
+                    @Model.Post.Body
+                </p>
+            </div>
+            <div class="card-footer d-flex flex-column">
+                <div class="row align-self-lg-end">
+                    @Model.Post.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                </div>
+
+                <div class="row">
+                    <form class="d-flex form-inline w-100 justify-content-between">
+                        <div class="form-group">
+                            <input type="hidden" name="UserName" value="@Model.User.Name" />
+                            <input type="hidden" name="UserSurname" value="@Model.User.Surname" />
+                            <input type="hidden" name="UserLogin" value="@Model.User.Login" />
+                            <input type="hidden" name="postId" value="@Model.Post.Id" />
+                            <input class="form-inline" type="text" name="Body" placeholder="Comment" />
+                            <input type="submit" class="btn btn-success" id="SendComment" value="Send" />
+                        </div>
+                    </form>
+                    <div style="border-bottom: 1px solid #000; width:100%; margin-bottom:5px;"></div>
+                </div>
+
+                <div class="comments">
+
+                @if (Model.Post.Comments != null && Model.Post.Comments.Count != 0)
+                {
+                    await Html.RenderPartialAsync("Comments", Model.Post.Comments.OrderByDescending(x => x.CreatedDate));
+                }
+                else
+                {
+                    <div class="row text-center no-comments">
+                        No comments
+                    </div>
+                }
+                </div>
+            </div>
+
+        </div>
+    </div>

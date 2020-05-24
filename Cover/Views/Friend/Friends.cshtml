@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Friend>
+
+@{
+    ViewData["Title"] = "Friends";
+}
+
+    <div class="row p-0 m-0 d-flex flex-column bg-light">
+        <div class="row m-0 p-0">
+            <h2>Friends</h2>
+        </div>
+
+        @if (Model == null)
+        {
+            <div class="row p-0 m-0">
+                <h3>No friends</h3>
+            </div>
+        }
+        else
+        {
+
+            @foreach (var friend in Model)
+            {
+                <div class="row p-0 m-0 border-bottom border-dark">
+                    <div class="col-1 bg-dark" style="width:50px;">
+
+                    </div>
+                    <div class="col">
+                        <a class="page-link" asp-controller="Friend" asp-action="Profile" asp-route-Login="@friend.FriendLogin">
+                            @friend.FriendName @friend.FriendSurname
+
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>

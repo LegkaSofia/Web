@@ -1,0 +1,32 @@
+﻿@model UserPageViewModel
+@{
+    ViewData["Title"] = Model.User.Name + " " + Model.User.Surname;
+}
+
+<div class="row d-flex flex-column bg-light m-0 p-0">
+    <div class="row justify-content-start m-0 p-0">
+        <h2>@Model.User.Name @Model.User.Surname</h2>
+    </div>
+    <div class="row d-flex flex-row m-0 p-0">
+        <div class="card bg-dark text-white w-100">
+            <div class="card-body">
+                <div class="row">
+                    Mail: @Model.User.Email
+                </div>
+                <div class="row">
+                    Age: @Model.User.Age
+                </div>
+                <div class="row">
+                    Date of birth:  @Model.User.DateOfBirth.ToString("dd/MM")
+                </div>
+                <div>
+                    Connetion: @Model.Path
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="border-bottom:1px solid #000;" class="w-100 mb-2"></div>
+    <div class="row d-flex flex-column align-content-center">
+        @{await Html.RenderPartialAsync("../Home/Posts", Model.Posts);}
+    </div>
+</div>
